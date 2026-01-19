@@ -1,0 +1,10 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/bin": true,
+        "**/obj": true
+    },
+    "files.encoding": "utf8",
+    "dotnet.defaultSolution": "Faster.Collections.Pooled.slnx"
+}

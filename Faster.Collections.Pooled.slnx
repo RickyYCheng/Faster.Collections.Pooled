@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Faster.Collections.Pooled.Benchmarks/Faster.Collections.Pooled.Benchmarks.csproj" />
+  <Project Path="Faster.Collections.Pooled.Tests/Faster.Collections.Pooled.Tests.csproj" />
+  <Project Path="Faster.Collections.Pooled/Faster.Collections.Pooled.csproj" />
+</Solution>
