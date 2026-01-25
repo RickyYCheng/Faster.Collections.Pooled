@@ -100,7 +100,7 @@ dotnet fsi build.fsx build
 
 ## Roadmap
 - [x] Primitive pooled collections (`List`, `Dictionary`, `Queue`, `Stack`, `PriorityQueue`)
-- [ ] Double ended queue (based on PooledQueue)
+- [x] Double ended queue (based on PooledQueue)
 - [ ] Pooled Collections Extensions
 - [ ] Span support for boost performance
 - [ ] `PooledHashset` (based on `Faster.Map.BlitzSet`)

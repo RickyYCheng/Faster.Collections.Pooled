@@ -192,6 +192,7 @@ public partial class PooledQueue<T> : IEnumerable<T>,
     }
 
     // Adds item to the tail of the queue.
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Enqueue(T item)
     {
         if (_size == _array.Length)
@@ -207,18 +208,22 @@ public partial class PooledQueue<T> : IEnumerable<T>,
 
     // GetEnumerator returns an IEnumerator over this Queue.  This
     // Enumerator will support removing.
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Enumerator GetEnumerator() => new Enumerator(this);
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     /// <internalonly/>
     IEnumerator<T> IEnumerable<T>.GetEnumerator() =>
         Count == 0 ? SZGenericArrayEnumerator<T>.Empty :
         GetEnumerator();
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<T>)this).GetEnumerator();
 
     // Removes the object at the head of the queue and returns it. If the queue
     // is empty, this method throws an
     // InvalidOperationException.
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public T Dequeue()
     {
         int head = _head;
@@ -240,6 +245,7 @@ public partial class PooledQueue<T> : IEnumerable<T>,
         return removed;
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool TryDequeue([MaybeNullWhen(false)] out T result)
     {
         int head = _head;
@@ -265,6 +271,7 @@ public partial class PooledQueue<T> : IEnumerable<T>,
     // Returns the object at the head of the queue. The object remains in the
     // queue. If the queue is empty, this method throws an
     // InvalidOperationException.
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public T Peek()
     {
         if (_size == 0)
@@ -275,6 +282,7 @@ public partial class PooledQueue<T> : IEnumerable<T>,
         return _array[_head];
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool TryPeek([MaybeNullWhen(false)] out T result)
     {
         if (_size == 0)
@@ -360,6 +368,7 @@ public partial class PooledQueue<T> : IEnumerable<T>,
     }
 
     // Increments the index wrapping it if necessary.
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void MoveNext(ref int index)
     {
         // It is tempting to use the remainder operator here but it is actually much slower

@@ -14,7 +14,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>MIT</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <SignAssembly>true</SignAssembly>
     <PackageProjectUrl>https://github.com/RickyYCheng/Faster.Collections.Pooled</PackageProjectUrl>
     <RepositoryUrl>https://github.com/RickyYCheng/Faster.Collections.Pooled</RepositoryUrl>
