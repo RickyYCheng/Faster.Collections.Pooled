@@ -1,3 +1,6 @@
+// Copyright (c) 2026, RickyYC and Contributors. All rights reserved.
+// Distributed under the MIT Software License, Version 1.0.
+
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
 using BenchmarkDotNet.Exporters;

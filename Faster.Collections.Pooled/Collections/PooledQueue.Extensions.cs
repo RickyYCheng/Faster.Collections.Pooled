@@ -1,7 +1,20 @@
+// Copyright (c) 2026, RickyYC and Contributors. All rights reserved.
+// Distributed under the MIT Software License, Version 1.0.
+
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace Faster.Collections.Pooled;
+
+public partial class PooledQueue<T>
+{
+    public PooledQueue(ReadOnlySpan<T> source) : this(source.Length)
+    {
+        source.CopyTo(_array);
+        _size = source.Length;
+        if (_size != _array.Length) _tail = _size;
+    }
+}
 
 public partial class PooledQueue<T>
 {

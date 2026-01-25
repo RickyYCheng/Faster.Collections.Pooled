@@ -99,10 +99,6 @@ dotnet fsi build.fsx build
 > Almost same speed, no allocations.
 
 ## Roadmap
-- [x] Primitive pooled collections (`List`, `Dictionary`, `Queue`, `Stack`, `PriorityQueue`)
-- [x] Double ended queue (based on PooledQueue)
-- [ ] Pooled Collections Extensions
-- [ ] Span support for boost performance
 - [ ] `PooledHashset` (based on `Faster.Map.BlitzSet`)
 - [ ] `ISerializable` and `IDeserializationCallback` support for `PooledDictionary`
 
