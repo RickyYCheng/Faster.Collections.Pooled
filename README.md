@@ -27,8 +27,9 @@ A high-performance collection library for .NET 10+ that provides pooled alternat
 
 ### NuGet Package
 
-> [!WARNING]  
-> WIP, coming soon...
+```bash
+dotnet add package Faster.Collections.Pooled
+```
 
 ### Build from Source
 
