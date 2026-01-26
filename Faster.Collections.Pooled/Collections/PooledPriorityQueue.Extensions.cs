@@ -23,3 +23,19 @@ public partial class PooledPriorityQueue<TElement, TPriority>
     {
     }
 }
+
+public static partial class PooledCollectionsExtensions
+{
+    public static PooledPriorityQueue<TElement, TPriority> ToPooledPriorityQueue<TElement, TPriority>(this ReadOnlySpan<(TElement Element, TPriority Priority)> source, IComparer<TPriority>? comparer = null) => 
+        new PooledPriorityQueue<TElement, TPriority>(source, comparer);
+    public static PooledPriorityQueue<TElement, TPriority> ToPooledPriorityQueue<TElement, TPriority>(this Span<(TElement Element, TPriority Priority)> source, IComparer<TPriority>? comparer = null) => 
+        new PooledPriorityQueue<TElement, TPriority>(source, comparer);
+    public static PooledPriorityQueue<TElement, TPriority> ToPooledPriorityQueue<TElement, TPriority>(this ReadOnlyMemory<(TElement Element, TPriority Priority)> source, IComparer<TPriority>? comparer = null) => 
+        new PooledPriorityQueue<TElement, TPriority>(source.Span, comparer);
+    public static PooledPriorityQueue<TElement, TPriority> ToPooledPriorityQueue<TElement, TPriority>(this Memory<(TElement Element, TPriority Priority)> source, IComparer<TPriority>? comparer = null) => 
+        new PooledPriorityQueue<TElement, TPriority>(source.Span, comparer);
+    public static PooledPriorityQueue<TElement, TPriority> ToPooledPriorityQueue<TElement, TPriority>(this IEnumerable<(TElement Element, TPriority Priority)> source, IComparer<TPriority>? comparer = null) =>
+        new PooledPriorityQueue<TElement, TPriority>(source, comparer);
+    public static PooledPriorityQueue<TElement, TPriority> ToPooledPriorityQueue<TElement, TPriority>(this (TElement Element, TPriority Priority)[] source, IComparer<TPriority>? comparer = null) => 
+        new PooledPriorityQueue<TElement, TPriority>(source, comparer);
+}

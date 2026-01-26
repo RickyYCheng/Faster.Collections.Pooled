@@ -14,14 +14,40 @@ A high-performance collection library for .NET 10+ that provides pooled alternat
 
 | Collection | API Source |
 |-----------|------------|
-| `PooledList<T>` | `List<T>` |
-| `PooledQueue<T>` | `Queue<T>` |
-| `PooledStack<T>` | `Stack<T>` |
-| `PooledPriorityQueue<TElement, TPriority>` | `PriorityQueue<TElement, TPriority>` |
-| `PooledDictionary<TKey, TValue>` | `FasterMap.BlitzMap<TKey, TValue>` + Interfaces* of `Dictionary<TKey, TValue>` |
+| `PooledList` | `List` |
+| `PooledQueue` | `Queue` |
+| `PooledStack` | `Stack` |
+| `PooledPriorityQueue` | `PriorityQueue` |
+| `PooledDictionary` | `FasterMap.BlitzMap` + Interfaces* of `Dictionary` |
 
 > [!IMPORTANT]  
-> \* `PooledDictionary` implements standard interfaces of `Dictionary<TKey, TValue>` except `ISerializable` and `IDeserializationCallback`
+> \* `PooledDictionary` implements standard interfaces of `Dictionary` except `ISerializable` and `IDeserializationCallback`
+
+## Special API
+
+### ToPooledCollection Series
+```C#
+using PooledList<int> list = [1, 2, 3, 4, 5];
+list.ToPooledQueue();          // Convert to PooledQueue
+list.ToPooledStack();          // Convert to PooledStack
+```
+
+### Deque
+```C#
+using PooledDeque<int> deque = [];
+deque.EnququeHead(1);
+deque.EnququeTail(2);
+```
+
+### Construction based on Collection Expression
+```C#
+using PooledDeque<int> deque = [0];
+using PooledDictionary<int, int> dict = [ 
+    (1, 1), 
+    (2, 2),
+    (3, 3), 
+];
+```
 
 ## Installation
 
@@ -41,7 +67,7 @@ dotnet fsi build.fsx build
 
 > [!NOTE]  
 > Sometimes, benchmark-dotnet or GC will allocate small amount of memory.  
-> For exmaple, the benchmark below shows `System.Collections.Generic.PriorityQueue<TElement, TPriority>.Dequeue` allocates `0 B`, but it may allocate a few bytes in some runs.
+> For exmaple, the benchmark below shows `System.Collections.Generic.PriorityQueue.Dequeue` allocates `0 B`, but it may allocate a few bytes in some runs.
 
 | Method                     | N      | Mean           | Error        | StdDev       | Median         | Ratio | RatioSD | Allocated | Alloc Ratio |
 |--------------------------- |------- |---------------:|-------------:|-------------:|---------------:|------:|--------:|----------:|------------:|

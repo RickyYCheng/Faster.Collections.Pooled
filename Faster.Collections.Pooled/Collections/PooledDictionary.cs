@@ -10,13 +10,31 @@ namespace Faster.Collections.Pooled;
 [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
 [DebuggerDisplay("Count = {Count}")]
 // [Serializable]
-public partial class PooledDictionary<TKey, TValue> : FasterDictionary<TKey, TValue>, IDisposable
+public partial class PooledDictionary<TKey, TValue> : FasterDictionary<TKey, TValue>, IDisposable where TKey : notnull
 {
     public PooledDictionary() : base(2, 0.8) { }
-
     public PooledDictionary(int length) : base(length, 0.8) { }
     public PooledDictionary(int length, double loadfactor) : base(length, loadfactor) { }
+    
+    public PooledDictionary(ReadOnlySpan<KeyValuePair<TKey, TValue>> source) : base(source) { }
+    public PooledDictionary(Span<KeyValuePair<TKey, TValue>> source) : base(source) { }
+    public PooledDictionary(ReadOnlyMemory<KeyValuePair<TKey, TValue>> source) : base(source) { }
+    public PooledDictionary(Memory<KeyValuePair<TKey, TValue>> source) : base(source) { }
+    public PooledDictionary(IEnumerable<KeyValuePair<TKey, TValue>> source) : base(source) {}
+    public PooledDictionary(KeyValuePair<TKey, TValue>[] source) : base(source) { }
+    public PooledDictionary(Dictionary<TKey, TValue> source) : base(source) { }
+    public PooledDictionary(IDictionary<TKey, TValue> source) : base(source) { }
+    public PooledDictionary(IReadOnlyDictionary<TKey, TValue> source) : base(source) { }
 
+    // Tuple-based constructors
+    public PooledDictionary(IEnumerable<(TKey Key, TValue Value)> source) : base(source) { }
+    public PooledDictionary(ReadOnlySpan<(TKey Key, TValue Value)> source) : base(source) { }
+    public PooledDictionary(Span<(TKey Key, TValue Value)> source) : base(source) { }
+    public PooledDictionary(ReadOnlyMemory<(TKey Key, TValue Value)> source) : base(source) { }
+    public PooledDictionary(Memory<(TKey Key, TValue Value)> source) : base(source) { }
+    public PooledDictionary((TKey Key, TValue Value)[] source) : base(source) { }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Dispose()
     {
         Dispose(true);

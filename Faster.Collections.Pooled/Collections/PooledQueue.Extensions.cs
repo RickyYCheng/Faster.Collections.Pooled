@@ -14,6 +14,10 @@ public partial class PooledQueue<T>
         _size = source.Length;
         if (_size != _array.Length) _tail = _size;
     }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void Add(T item) =>
+        Enqueue(item);
 }
 
 public partial class PooledQueue<T>
@@ -181,4 +185,20 @@ public partial class PooledQueue<T>
         result = _array[tailIndex];
         return true;
     }
+}
+
+public static partial class PooledCollectionsExtensions
+{
+    public static PooledQueue<T> ToPooledQueue<T>(this ReadOnlySpan<T> source) => 
+        new PooledQueue<T>(source);
+    public static PooledQueue<T> ToPooledQueue<T>(this Span<T> source) => 
+        new PooledQueue<T>(source);
+    public static PooledQueue<T> ToPooledQueue<T>(this ReadOnlyMemory<T> source) => 
+        new PooledQueue<T>(source.Span);
+    public static PooledQueue<T> ToPooledQueue<T>(this Memory<T> source) => 
+        new PooledQueue<T>(source.Span);
+    public static PooledQueue<T> ToPooledQueue<T>(this IEnumerable<T> source) => 
+        new PooledQueue<T>(source);
+    public static PooledQueue<T> ToPooledQueue<T>(this T[] source) => 
+        new PooledQueue<T>(source);
 }

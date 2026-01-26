@@ -1229,6 +1229,7 @@ public abstract partial class PooledBlitzMap<TKey, TValue, THasher> where THashe
         }
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     protected virtual void Dispose(bool disposing)
     {
         if (disposing)
@@ -1248,7 +1249,14 @@ public abstract partial class PooledBlitzMap<TKey, TValue, THasher> where THashe
     /// <param name="key">The key associated with the entry.</param>
     /// <param name="value">The value associated with the key.</param>
     [StructLayout(LayoutKind.Sequential)]
-    public record struct Entry(TKey Key, TValue Value);
+    public record struct Entry(TKey Key, TValue Value)
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator Entry((TKey Key, TValue Value) tuple) =>
+            new Entry(tuple.Key, tuple.Value);
+        public static implicit operator (TKey Key, TValue Value)(Entry entry) =>
+            (entry.Key, entry.Value);
+    }
 
     /// <summary>
     /// Represents a bucket in the hash table, which holds the signature and the index of the next bucket.

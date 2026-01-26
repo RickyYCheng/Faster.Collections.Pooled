@@ -283,7 +283,7 @@ public class PooledListExtensionsTests
 
         // Act & Assert
         // Use the extension method class directly to avoid null-forgiving operator
-        Assert.Throws<ArgumentNullException>(() => PooledCollectionsExtensions.CopyTo(list, destination));
+        Assert.Throws<ArgumentNullException>(() => PooledCollectionsExtensions.CopyTo(list!, destination));
     }
 
     [Fact]

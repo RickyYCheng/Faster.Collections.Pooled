@@ -20,12 +20,107 @@ public partial class FasterDictionary<TKey, TValue> :
     IReadOnlyCollection<KeyValuePair<TKey, TValue>>,
     IReadOnlyDictionary<TKey, TValue>,
     IDictionary
+    where TKey : notnull
 {
     public FasterDictionary() : base(2, 0.8) { }
 
     public FasterDictionary(int length) : base(length, 0.8) { }
 
     public FasterDictionary(int length, double loadfactor) : base(length, loadfactor) { }
+
+    public FasterDictionary(Dictionary<TKey, TValue> source)
+        : this(source.Count)
+    {
+        foreach (var kvp in source)
+        {
+            Add(kvp.Key, kvp.Value);
+        }
+    }
+
+    public FasterDictionary(IDictionary<TKey, TValue> source)
+        : this(source.Count)
+    {
+        foreach (var kvp in source)
+        {
+            Add(kvp.Key, kvp.Value);
+        }
+    }
+
+    public FasterDictionary(IReadOnlyDictionary<TKey, TValue> source)
+        : this(source.Count)
+    {
+        foreach (var kvp in source)
+        {
+            Add(kvp.Key, kvp.Value);
+        }
+    }
+
+    public FasterDictionary(IEnumerable<KeyValuePair<TKey, TValue>> source)
+        : this()
+    {
+        foreach (var kvp in source)
+        {
+            Add(kvp.Key, kvp.Value);
+        }
+    }
+
+    public FasterDictionary(Span<KeyValuePair<TKey, TValue>> source)
+        : this(source.Length)
+    {
+        for (int i = 0; i < source.Length; i++)
+        {
+            var kvp = source[i];
+            Add(kvp.Key, kvp.Value);
+        }
+    }
+
+    public FasterDictionary(ReadOnlySpan<KeyValuePair<TKey, TValue>> source)
+        : this(source.Length)
+    {
+        for (int i = 0; i < source.Length; i++)
+        {
+            var kvp = source[i];
+            Add(kvp.Key, kvp.Value);
+        }
+    }
+
+    public FasterDictionary(Memory<KeyValuePair<TKey, TValue>> source) : this(source.Span) { }
+    public FasterDictionary(ReadOnlyMemory<KeyValuePair<TKey, TValue>> source) : this(source.Span) { }
+    public FasterDictionary(KeyValuePair<TKey, TValue>[] source) : this((ReadOnlySpan<KeyValuePair<TKey, TValue>>)source) { }
+
+    // Tuple-based constructors
+    public FasterDictionary(IEnumerable<(TKey Key, TValue Value)> source)
+        : this()
+    {
+        foreach (var (Key, Value) in source)
+        {
+            Add(Key, Value);
+        }
+    }
+
+    public FasterDictionary(Span<(TKey Key, TValue Value)> source)
+        : this(source.Length)
+    {
+        for (int i = 0; i < source.Length; i++)
+        {
+            var (Key, Value) = source[i];
+            Add(Key, Value);
+        }
+    }
+
+    public FasterDictionary(ReadOnlySpan<(TKey Key, TValue Value)> source)
+        : this(source.Length)
+    {
+        for (int i = 0; i < source.Length; i++)
+        {
+            var (Key, Value) = source[i];
+            Add(Key, Value);
+        }
+    }
+
+    public FasterDictionary(Memory<(TKey Key, TValue Value)> source) : this(source.Span) { }
+    public FasterDictionary(ReadOnlyMemory<(TKey Key, TValue Value)> source) : this(source.Span) { }
+    public FasterDictionary((TKey Key, TValue Value)[] source) : this((ReadOnlySpan<(TKey Key, TValue Value)>)source) { }
 
     private KeyCollection? _keys;
     private ValueCollection? _values;

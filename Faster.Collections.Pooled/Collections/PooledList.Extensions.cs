@@ -88,3 +88,19 @@ public static partial class PooledCollectionsExtensions
         return new Span<T>(list._items, 0, list._size);
     }
 }
+
+public static partial class PooledCollectionsExtensions
+{
+    public static PooledList<T> ToPooledList<T>(this IEnumerable<T> source) =>
+        new PooledList<T>(source);
+    public static PooledList<T> ToPooledList<T>(this ReadOnlySpan<T> source) => 
+        new PooledList<T>(source);
+    public static PooledList<T> ToPooledList<T>(this Span<T> source) =>
+        new PooledList<T>(source);
+    public static PooledList<T> ToPooledList<T>(this ReadOnlyMemory<T> source) => 
+        new PooledList<T>(source.Span);
+    public static PooledList<T> ToPooledList<T>(this Memory<T> source) => 
+        new PooledList<T>(source.Span);
+    public static PooledList<T> ToPooledList<T>(this T[] source) =>
+        new PooledList<T>(source);
+}

@@ -67,21 +67,6 @@ public class ContainsTests
     }
 
     [Fact]
-    public void Contains_NullKey_WhenKeyTypeIsNullable()
-    {
-        // Arrange
-        var dictionary = new FasterDictionary<string?, int>();
-        dictionary["test"] = 1;
-        dictionary[null!] = 0;
-
-        // Act
-        var result = dictionary.Keys.Contains(null);
-
-        // Assert
-        Assert.True(result);
-    }
-
-    [Fact]
     public void Contains_AfterRemove_ReturnsFalse()
     {
         // Arrange
