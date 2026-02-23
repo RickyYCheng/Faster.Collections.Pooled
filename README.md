@@ -127,6 +127,7 @@ dotnet fsi build.fsx build
 ## Roadmap
 - [ ] `PooledHashset` (based on `Faster.Map.BlitzSet`)
 - [ ] `ISerializable` and `IDeserializationCallback` support for `PooledDictionary`
+- [ ] Try using `IMemoryOwner<T>` ownership model compatible with existing types
 
 ## Acknowledgments
 
